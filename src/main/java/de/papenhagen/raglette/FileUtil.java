@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
 @Slf4j
 public class FileUtil {
 
-    public List<String> readLocalDocuments() {
+    public static List<String> readLocalDocuments() {
         final List<String> hashes = new ArrayList<>();
         final List<String> fileNames = new ArrayList<>();
         final File[] files = new File("/documents/").listFiles();
@@ -49,8 +49,8 @@ public class FileUtil {
         //write back the hashes to the list
         try {
             final FileWriter fileWriter = new FileWriter(hashList);
-            for (String s : hashes) {
-                fileWriter.write(s);
+            for (String hash : hashes) {
+                fileWriter.write(hash);
             }
             fileWriter.close();
         } catch (IOException e) {

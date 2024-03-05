@@ -8,6 +8,7 @@ import dev.langchain4j.store.embedding.EmbeddingMatch;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.qdrant.QdrantEmbeddingStore;
 
+import java.io.File;
 import java.util.List;
 
 public class QdrantEmbeddingStoreExample {
@@ -27,15 +28,16 @@ public class QdrantEmbeddingStoreExample {
         final EmbeddingModel embeddingModel = new AllMiniLmL6V2EmbeddingModel();
 
         //feeding
-        TextSegment segment1 = TextSegment.from("I've been to France twice.");
-        Embedding embedding1 = embeddingModel.embed(segment1).content();
-        embeddingStore.add(embedding1, segment1);
+        final List<String> fileNames = FileUtil.readLocalDocuments();
+        for (final String fileName : fileNames) {
+            final File tempFile = new File(fileName);
+            final String text = PdfUtil.getText(tempFile);
+            final String metaText = PdfUtil.getMetaText(tempFile);
 
-        TextSegment segment2 = TextSegment.from("New Delhi is the capital of India.");
-        Embedding embedding2 = embeddingModel.embed(segment2).content();
-        embeddingStore.add(embedding2, segment2);
-
-
+            final TextSegment segment = TextSegment.from(text + metaText);
+            final Embedding embedding = embeddingModel.embed(segment).content();
+            embeddingStore.add(embedding, segment);
+        }
 
         //qasking
         Embedding queryEmbedding = embeddingModel.embed("Did you ever travel abroad?").content();
