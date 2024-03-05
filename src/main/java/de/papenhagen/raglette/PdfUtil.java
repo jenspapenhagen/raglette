@@ -1,3 +1,5 @@
+package de.papenhagen.raglette;
+
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.parser.PdfTextExtractor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,10 +11,6 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public class PdfUtil {
-
-    //TODO add file to list
-    //checklist for file
-
 
     @Nonnull
     public static String getText(@Nonnull final File file) {
