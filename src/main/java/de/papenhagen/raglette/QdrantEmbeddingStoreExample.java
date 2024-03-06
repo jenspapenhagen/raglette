@@ -15,12 +15,13 @@ public class QdrantEmbeddingStoreExample {
 
     public static void main(String[] args) {
 
+        //Model all-MiniLM-L6-v2
         final EmbeddingStore<TextSegment> embeddingStore =
                 QdrantEmbeddingStore.builder()
                         // Ensure the collection is configured with the appropriate dimensions (384)
                         // of the embedding model.
-                        .collectionName("{collection_name}")
-                        .host("localhost")
+                        .collectionName(System.getenv("QDRANT_COLLECTION"))
+                        .host(System.getenv("QDRANT_URL"))
                         // GRPC port of the Qdrant server
                         .port(6334)
                         .build();

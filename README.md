@@ -8,3 +8,10 @@ and for text embeddings use model:
 
 [all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2)
 over [langchain4j](https://github.com/langchain4j/langchain4j)
+
+
+
+### Install
+- mv .env.example .env
+- docker-compose up
+- ./createCollection.sh
