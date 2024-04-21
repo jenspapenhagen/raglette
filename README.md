@@ -9,6 +9,9 @@ and for text embeddings use model:
 [all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2)
 over [langchain4j](https://github.com/langchain4j/langchain4j)
 
+like:
+https://medium.com/@seeusimong/retrieval-augmented-generation-with-pgvector-and-ollama-e342967a0ff7
+but with a betetr backend.
 
 
 ### Install
