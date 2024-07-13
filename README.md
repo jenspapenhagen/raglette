@@ -30,7 +30,7 @@ this can be scaled.
 extract text from test.pdf
 
 ```shell
-curl -T test.pdf http://localhost:9998/tika/text --header "Accept: application/json"
+curl -T documents/test.pdf http://localhost:9998/tika/text --header "Accept: application/json"
 ```
 
 upload text to ollama
