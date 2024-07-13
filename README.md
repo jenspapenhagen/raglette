@@ -56,7 +56,12 @@ curl -L -X PUT 'http://localhost:6333/collections/test_collection/points?wait=tr
 }'
 ```
 
-<https://ollama.com/library/nomic-embed-text>
+added a small endpoint \
+in python flask for the ollama service
+
+- go to "endpoint"
+- build the Dockerfile (build.sh)
+- remove comments from docker-compose.yaml
 
 --- old ---\
 vector db [Qdrant](https://github.com/qdrant/qdrant)
@@ -69,3 +74,4 @@ links:
 
 - <https://medium.com/@seeusimong/retrieval-augmented-generation-with-pgvector-and-ollama-e342967a0ff7>
 - <https://tembo.io/blog/sentence-transformers>
+- <https://ollama.com/library/nomic-embed-text>

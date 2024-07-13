@@ -52,7 +52,14 @@ services:
       - 80:9998
     container_name: tika  
     restart: unless-stopped
-              
+# simple endpoint ollama    
+# python-endpoint:
+#  image: python-endpoint
+#  ports:
+#   - 5000:5000
+#  depends_on:
+#   - ollama
+
 volumes:
   ollama:
     external: true
