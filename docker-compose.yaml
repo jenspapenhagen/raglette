@@ -15,15 +15,6 @@ services:
      - ollama
     extra_hosts:
       - "host.docker.internal:host-gateway"
- #Qdrant as vector db     
- qdrant:
-    image: qdrant/qdrant:latest
-    ports:
-      - "6333:6333"
-    volumes:
-      - ./qdrant_data:/qdrant/storage
-    profiles:
-      - local
  #ollama with GPU
  ollama:
    image: ollama/ollama
@@ -44,6 +35,16 @@ services:
            - driver: nvidia
              device_ids: ['all']
              capabilities: [gpu]
+ #Qdrant as vector db     
+ qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./qdrant_data:/qdrant/storage
+    profiles:
+      - local
+      
  #apache tika server with ocr
  tika:
     image: logicalspark/docker-tikaserver:latest
