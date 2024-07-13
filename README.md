@@ -64,6 +64,7 @@ in python flask for the ollama service
 - go to "endpoint"
 - build the Dockerfile (build.sh)
 - remove comments from docker-compose.yaml
+- restart docker-compose
 - now you can use this endpoint:
 
 ```shell
