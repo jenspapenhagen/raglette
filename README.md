@@ -34,13 +34,14 @@ Request
 ```shell
 curl http://localhost:9998/tika --upload-file document/test.pdf
 ```
+
 Response
 
 ```txt
 hier steht der text
 ```
 
-#### upload text to ollama (or look [here](#simpler-endpoint)) ####
+#### upload text to ollama ####
 
 Request
 
@@ -63,6 +64,7 @@ Response
 ```
 
 #### upload emdedding to qdrant ####
+
 hints:
 
 - count id up by hand
@@ -91,10 +93,10 @@ Response
 }
 ```
 
-### simpler endpoint ###
+### test client ###
 
 added a small endpoint \
-in python flask for the ollama service
+in python flask for the ollama service glued together with the qdrant upload
 
 - go to "endpoint"
 - build the Dockerfile (build.sh)
@@ -114,21 +116,15 @@ Response
 
 ```json
 {
-  "embedding": [
-    0.5670403838157654, 0.009260174818336964, 0.23178744316101074, -0.2916173040866852, -0.8924556970596313,
-    0.8785552978515625, -0.34576427936553955, 0.5742510557174683, -0.04222835972905159, -0.137906014919281
-  ]
+  "status": "completed"
 }
 ```
---- old ---\
-vector db [Qdrant](https://github.com/qdrant/qdrant)
 
-and for text embeddings use model:
-[all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2)
-over [langchain4j](https://github.com/langchain4j/langchain4j)
+### links ###
 
-links:
-
+- vector db [Qdrant](https://github.com/qdrant/qdrant)
+- [all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2)
+- [langchain4j](https://github.com/langchain4j/langchain4j)
 - <https://medium.com/@seeusimong/retrieval-augmented-generation-with-pgvector-and-ollama-e342967a0ff7>
 - <https://tembo.io/blog/sentence-transformers>
 - <https://ollama.com/library/nomic-embed-text>
