@@ -1,6 +1,22 @@
 services:
-
-  qdrant:
+#web ui for ollama for easyer use/testing
+ webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    expose:
+     - 8080/tcp
+    ports:
+     - 3000:8080/tcp
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    volumes:
+      - open-webui:/app/backend/data
+    depends_on:
+     - ollama
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+ #Qdrant as vector db     
+ qdrant:
     image: qdrant/qdrant:latest
     ports:
       - "6333:6333"
@@ -8,3 +24,31 @@ services:
       - ./qdrant_data:/qdrant/storage
     profiles:
       - local
+      
+#ollama with GPU
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    expose:
+     - 11434/tcp
+    ports:
+     - 11434:11434/tcp
+    healthcheck:
+      test: ollama --version || exit 1
+    command: serve
+    volumes:
+      - ollama:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['all']
+              capabilities: [gpu]
+              
+volumes:
+  ollama:
+    external: true
+  open-webui:
+    external: true
+    
