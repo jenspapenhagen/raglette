@@ -24,31 +24,38 @@ services:
       - ./qdrant_data:/qdrant/storage
     profiles:
       - local
-      
-#ollama with GPU
-  ollama:
-    image: ollama/ollama
-    container_name: ollama
-    expose:
-     - 11434/tcp
+ #ollama with GPU
+ ollama:
+   image: ollama/ollama
+   container_name: ollama
+   expose:
+    - 11434/tcp
+   ports:
+    - 11434:11434/tcp
+   healthcheck:
+     test: ollama --version || exit 1
+   command: serve
+   volumes:
+     - ollama:/root/.ollama
+   deploy:
+     resources:
+       reservations:
+         devices:
+           - driver: nvidia
+             device_ids: ['all']
+             capabilities: [gpu]
+ #apache tika server with ocr
+ tika:
+    image: logicalspark/docker-tikaserver:latest
     ports:
-     - 11434:11434/tcp
-    healthcheck:
-      test: ollama --version || exit 1
-    command: serve
-    volumes:
-      - ollama:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              device_ids: ['all']
-              capabilities: [gpu]
+      - 80:9998
+    container_name: tika  
+    restart: unless-stopped
               
 volumes:
   ollama:
     external: true
   open-webui:
     external: true
-    
+  qdrant:
+    external: true
