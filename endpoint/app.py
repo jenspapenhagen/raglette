@@ -50,7 +50,6 @@ def process_input(input_item:str):
         logger.error(f"Ollama API request failed with status code {response.status_code}")
         return None
 
-
 @app.route('/embeddings', methods=['POST'])
 def embeddings():
     data = request.json
@@ -63,13 +62,8 @@ def embeddings():
     embeddings = process_input(input_data)
     
     response = {
-        "data": [
-            {
-                "embedding": emb,
-                "index": i
-            } for i, emb in enumerate(embeddings)
-        ]
-    }
+                "embedding": embeddings,               
+               }
 
     if response is None:
         raise HTTPException("No Response")
