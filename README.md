@@ -28,6 +28,30 @@ this can be scaled.
 3. JSON response from Ollama Endpoint send to Qdrand Endpoint
 
 
+extract text from test.pdf
+```shell
+curl -T test.pdf http://localhost:9998/tika/text --header "Accept: application/json"
+```
+upload text to ollama
+```shell
+curl http://localhost:11434/api/embeddings -d '{
+  "model": "nomic-embed-text",
+  "prompt": "XXXXX"
+}'
+```
+upload emdedding to qdrant
+```shell
+curl -L -X PUT 'http://localhost:6333/collections/test_collection/points?wait=true' \ -H 'Content-Type: application/json' \ --data-raw '{
+  "points": [
+    {"id": 1, "vector": [0.05, 0.61, 0.76, 0.74], "payload": {"filename": "test.pdf"}},
+  ]
+}'
+```
+
+
+https://ollama.com/library/nomic-embed-text
+
+
 --- old ---<br>
 vector db [Qdrant](https://github.com/qdrant/qdrant)
 
