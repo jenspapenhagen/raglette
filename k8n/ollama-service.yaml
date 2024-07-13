@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: c:\Users\jay\AppData\Roaming\Code\User\globalStorage\othy1010.kompose\kompose.exe convert --out=c:\Users\jay\IdeaProjects\raglette --file=c:\Users\jay\IdeaProjects\raglette\docker-compose.yaml
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ollama
+  name: ollama
+spec:
+  ports:
+    - name: "11434"
+      port: 11434
+      targetPort: 11434
+  selector:
+    io.kompose.service: ollama
+status:
+  loadBalancer: {}
