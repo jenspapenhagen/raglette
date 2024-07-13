@@ -29,17 +29,39 @@ this can be scaled.
 
 extract text from test.pdf
 
+Request
+
 ```shell
 curl -T documents/test.pdf http://localhost:9998/tika/text --header "Accept: application/json"
 ```
+Response
+
+```json
+{
+ 
+}
+```
 
 upload text to ollama (or look [here](#simpler-endpoint))
+
+Request
 
 ```shell
 curl http://localhost:11434/api/embeddings -d '{
   "model": "nomic-embed-text",
   "prompt": "XXXXX"
 }'
+```
+
+Response
+
+```json
+{
+  "embedding": [
+    0.5670403838157654, 0.009260174818336964, 0.23178744316101074, -0.2916173040866852, -0.8924556970596313,
+    0.8785552978515625, -0.34576427936553955, 0.5742510557174683, -0.04222835972905159, -0.137906014919281
+  ]
+}
 ```
 
 upload emdedding to qdrant\
