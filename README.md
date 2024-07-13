@@ -27,22 +27,20 @@ this can be scaled.
 2. JSON response from Tika Server send to Ollama Endpoint
 3. JSON response from Ollama Endpoint send to Qdrand Endpoint
 
-extract text from test.pdf
+#### extract text from test.pdf ####
 
 Request
 
 ```shell
-curl -T documents/test.pdf http://localhost:9998/tika/text --header "Accept: application/json"
+curl http://localhost:9998/tika --upload-file document/test.pdf
 ```
 Response
 
-```json
-{
- 
-}
+```txt
+hier steht der text
 ```
 
-upload text to ollama (or look [here](#simpler-endpoint))
+#### upload text to ollama (or look [here](#simpler-endpoint)) ####
 
 Request
 
@@ -64,11 +62,13 @@ Response
 }
 ```
 
-upload emdedding to qdrant\
-hints:\
+#### upload emdedding to qdrant ####
+hints:
 
 - count id up by hand
 - custommice the payload
+
+Request
 
 ```shell
 curl -L -X PUT 'http://localhost:6333/collections/test_collection/points?wait=true' \ -H 'Content-Type: application/json' \ --data-raw '{
@@ -76,6 +76,19 @@ curl -L -X PUT 'http://localhost:6333/collections/test_collection/points?wait=tr
     {"id": 1, "vector": [0.05, 0.61, 0.76, 0.74], "payload": {"filename": "test.pdf"}},
   ]
 }'
+```
+
+Response
+
+```json
+{
+  "time": 1.1,
+  "status": "status",
+  "result": {
+    "status": "acknowledged",
+    "operation_id": 1
+  }
+}
 ```
 
 ### simpler endpoint ###
@@ -89,12 +102,24 @@ in python flask for the ollama service
 - restart docker-compose
 - now you can use this endpoint:
 
+Request
+
 ```shell
 curl http://localhost:5000/embeddings -d '{
   "input": "XXXXX",
 }'
 ```
 
+Response
+
+```json
+{
+  "embedding": [
+    0.5670403838157654, 0.009260174818336964, 0.23178744316101074, -0.2916173040866852, -0.8924556970596313,
+    0.8785552978515625, -0.34576427936553955, 0.5742510557174683, -0.04222835972905159, -0.137906014919281
+  ]
+}
+```
 --- old ---\
 vector db [Qdrant](https://github.com/qdrant/qdrant)
 
