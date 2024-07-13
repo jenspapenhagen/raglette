@@ -51,7 +51,7 @@ def process_input(input_item:str):
         return None
 
 
-@app.route('/v1/embeddings', methods=['POST'])
+@app.route('/embeddings', methods=['POST'])
 def embeddings():
     data = request.json
     logger.info(f"Received request: {json.dumps(data, indent=2)}")

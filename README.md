@@ -33,7 +33,7 @@ extract text from test.pdf
 curl -T documents/test.pdf http://localhost:9998/tika/text --header "Accept: application/json"
 ```
 
-upload text to ollama
+upload text to ollama (or look [here](#simpler-endpoint))
 
 ```shell
 curl http://localhost:11434/api/embeddings -d '{
@@ -56,12 +56,21 @@ curl -L -X PUT 'http://localhost:6333/collections/test_collection/points?wait=tr
 }'
 ```
 
+### simpler endpoint ###
+
 added a small endpoint \
 in python flask for the ollama service
 
 - go to "endpoint"
 - build the Dockerfile (build.sh)
 - remove comments from docker-compose.yaml
+- now you can use this endpoint:
+
+```shell
+curl http://localhost:5000/embeddings -d '{
+  "input": "XXXXX",
+}'
+```
 
 --- old ---\
 vector db [Qdrant](https://github.com/qdrant/qdrant)
